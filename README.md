@@ -3,6 +3,10 @@
 
 <ul>
   <li>
-    <a href="https://warrior258.github.io/Coursea-HTML-CSS-JS/module_2/index.html">Module-2</a>
+    <a href="https://warrior258.github.io/Coursea-HTML-CSS-JS/module-2/index.html">Module-2</a>
+  </li>
+  
+  <li>
+    <a href="https://warrior258.github.io/Coursea-HTML-CSS-JS/module-3/index.html">Module-2</a>
   </li>
 </ul>
