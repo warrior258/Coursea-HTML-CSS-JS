@@ -11,6 +11,6 @@
   </li>
   
   <li>
-    <a href="https://warrior258.github.io/Coursea-HTML-CSS-JS/module-5/index.html">Module-3</a>
+    <a href="https://warrior258.github.io/Coursea-HTML-CSS-JS/module-5/index.html">Module-5</a>
   </li>
 </ul>
