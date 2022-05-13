@@ -15,6 +15,6 @@
   </li>
   
   <li>
-    <a href="https://warrior258.github.io/Coursea-HTML-CSS-JS/Course-Site/index.html">Testing</a>
+    <a href="https://warrior258.github.io/Coursea-HTML-CSS-JS/Course-Site/SignUp.html">Testing</a>
   </li>
 </ul>
