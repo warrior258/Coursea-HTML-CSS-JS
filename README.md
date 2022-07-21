@@ -15,7 +15,7 @@
   </li>
   
    <li>
-    <a href="https://warrior258.github.io/Coursea-HTML-CSS-JS/numbergame.html">Game</a>
+    <a href="https://warrior258.github.io/Coursea-HTML-CSS-JS/numberGame.html">Game</a>
   </li>
   
  
