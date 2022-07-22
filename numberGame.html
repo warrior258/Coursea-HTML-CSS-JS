@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Quinze</title>
+
+	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+	<script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+
+</head>
+
+<style>
+
+	@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+	body{
+		background: rgb(247,203,253);
+		background: linear-gradient(49deg, rgba(247,203,253,1) 0%, rgba(119,88,209,1) 100%);
+		font-family: 'Quicksand', sans-serif;	
+		height: 100vh;
+		position: relative;
+	}
+	
+
+	.container{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+	}
+
+	.bx-check{
+		color: #1c1833;
+		font-weight: bold;
+		position: absolute;
+	}
+
+	.bx-x{
+		color: #1c1833;
+		font-weight: bold;
+		position: absolute;
+		/*padding: 5px;
+		margin-top: -20px;*/
+	}
+
+	#check1, #check2, #check3{
+		padding: 5px;
+		margin-top: -20px;
+	}
+
+	#check4, #check5, #check6{
+		padding: 5px;
+		margin-left: -18px;
+	}
+
+	#check7{
+		padding: 4px;
+	}
+
+	#check8{
+		padding: 5px;
+		margin-top: -25px;
+	}
+
+
+	/*i{
+		color: white;
+	}*/
+
+
+
+	
+	table tr td input{
+		width: 80px;
+		height: 80px;
+		text-align: center;
+		border: none;
+		outline: none;
+		background-color: #1c1833;
+		color: white;
+		border-radius: 10px;
+		font-size: 25px;
+		font-weight: bold;
+
+		/*THis change the color of the cursor inside the input Box*/
+		/*caret-color: grey;*/
+	}
+
+	.right td{
+		text-align: center;
+	}
+
+	.right td i{
+		display: none;
+		font-size: 25px;
+	}
+
+	.confetti{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+	}
+
+	.cong{
+		text-align: center;
+		position: fixed;
+		width: 100%;
+		display: none;
+	}
+
+	.pop{
+		width:450px; 
+		height:200px; 
+		background-color:white;
+		border-radius: 20px;	
+		box-shadow: 5px 5px 50px black;
+		text-align: center;	
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.pop input{
+		padding: 8px 15px;
+		border: none;
+		outline: none;
+		background-color: rgb(247,203,253);
+		border-radius: 5px;
+		color: #1c1833;		
+		font-family: 'QuickSand';
+		font-weight: 600;
+		text-align: center;
+	}
+
+	button{
+		padding: 8px 15px;
+		border: none;
+		background-color: #1c1833;
+		color: white;
+		letter-spacing: 1px;
+		font-family: 'QuickSand';
+		font-weight: bold;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	.pop-container{
+		display: flex; 
+		justify-content:center; 
+		width:100%; 
+		height: 100vh; 
+		align-items: center; 
+		position: absolute;
+	}
+
+	
+
+</style>
+
+
+<body>
+
+	<div class="pop-container" id="pop-cont">	
+
+		<div class="pop good" id="good-box">
+			<h1 style="margin: 0; color: #1c1833;" id="luckMess">Good Luck! &#128578</h1>
+			
+			<button onclick="closeGood()">OK</button>
+		</div>
+
+	</div>
+
+	
+	
+	<div class="pop-container" id="pop-box">	
+
+		<div class="pop">
+			<h1 style="margin: 0; color: #1c1833;">Enter Your Name &#128578</h1>
+			<div>
+				<input type="text" name="" id="name">
+			</div>
+			<button onclick="getname()">Submit</button>
+		</div>
+
+	</div>
+
+	
+
+
+	
+	
+
+	<div style="position: fixed; left: 20px; top:2px">
+		<h1 id="head">QUINZE &#128520;</h1>
+	</div>
+
+	<div class="cong" id="cong">
+		<h1 id="congMes">Congrats!</h1>
+	</div>
+	<canvas class="confetti" id="canvas"></canvas>
+
+	
+
+	<div class="container" id="game">
+
+		<table cellspacing="10px">
+
+			<tr class="right">
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><i class="bx bx-check" id="check8"></i></td>
+			</tr>
+
+			<tr class="right">
+				<td><input type="text" name="" maxlength="1" placeholder="0" id="1" oninput="test()"></td>
+				<td><input type="text" name="" maxlength="1" placeholder="0" id="2" oninput="test()"></td>
+				<td><input type="text" name="" maxlength="1" placeholder="0" id="3" oninput="test()"></td>	
+				<td><i class="bx bx-check" id="check1"></i></td>		
+			</tr>
+			<tr class="right">
+				<td><input type="text" name="" maxlength="1" placeholder="0" id="4" oninput="test()"></td>
+				<td><input type="text" name="" maxlength="1" placeholder="0" id="5" oninput="test()"></td>
+				<td><input type="text" name="" maxlength="1" placeholder="0" id="6" oninput="test()"></td>
+				<td><i class='bx bx-check' id="check2"></i></td>
+			</tr>
+			<tr class="right">
+				<td><input type="text" name="" maxlength="1" placeholder="0" id="7" oninput="test()"></td>
+				<td><input type="text" name="" maxlength="1" placeholder="0" id="8" oninput="test()"></td>
+				<td><input type="text" name="" maxlength="1" placeholder="0" id="9" oninput="test()"></td>
+				<td><i class='bx bx-check' id="check3"></i></td>
+			</tr>
+			<tr class="right">
+				<td><i class='bx bx-check' id="check4"></i></td>
+				<td><i class='bx bx-check' id="check5"></i></td>
+				<td><i class='bx bx-check' id="check6"></i></td>	
+				<td><i class='bx bx-check' id="check7"></td>	
+			</tr>
+		</table>
+
+	</div>
+
+	<p id="para"></p>
+
+	
+
+
+
+	<script>
+
+		window.onload = popUp();
+
+		function closeGood(){
+			let goodbox = document.getElementById('pop-cont');
+			let cont  = document.getElementById('game');
+
+			goodbox.style.transform = "translateY(-1000px)";
+
+				//popbox.style.opacity = "0";
+			goodbox.style.transition = "all 0.5s ease";
+			//pop.style.zIndex="-1";
+			
+			
+
+		}
+
+
+		
+
+		function popUp(){
+			const tl = gsap.timeline({defaults: {duration: 0.75, ease: "power1.out"}});
+			tl.fromTo('.pop', {scale: 0}, {scale: 1, ease: "elastic.out(1, 0.4)", duration: 1.5});
+
+		}
+
+		function goodLuck(){
+			const tl = gsap.timeline({defaults: {duration: 0.75, ease: "power1.out"}});
+			tl.fromTo('#good-box', {scale: 0}, {scale: 1, ease: "elastic.out(1, 0.4)", duration: 1.5});
+
+		}
+
+		function popClose(){
+			const tl = gsap.timeline({defaults: {duration: 0.75, ease: "power1.out"}});
+			tl.fromTo('.pop', {scale: 1}, {scale: 0, ease:"elastice.out", duration:0.3});
+
+		}
+
+
+		function getname(){
+			let userName = document.getElementById('name');
+			let popbox = document.getElementById('pop-box');
+			//let pop = document.getElementsByClassName('pop-container')[0];
+
+			let luck = document.getElementById('good-box');
+
+			let Lmess = document.getElementById('luckMess');
+
+			document.cookie = userName.value;
+
+			if(userName.value != ''){
+				popbox.style.transform = "translateY(-1000px)";
+
+				//popbox.style.opacity = "0";
+				popbox.style.transition = "all 0.5s ease";
+				goodLuck();
+				
+				Lmess.style.fontSize="23px";
+				Lmess.innerHTML=`Good Luck ${document.cookie} ! &#128578`;	
+
+			}
+			else{
+
+				userName.style.border="2px solid #1c1833";
+			}			
+
+			
+
+		}
+
+		/*window.onload = name();
+
+
+		function name(){
+			prompt("Enter Your Name");
+		}*/
+		
+		function test(){
+
+			
+			let box1 = parseInt(document.getElementById("1").value);
+			let box2 = parseInt(document.getElementById("2").value);
+			let box3 = parseInt(document.getElementById("3").value);
+			let box4 = parseInt(document.getElementById("4").value);
+			let box5 = parseInt(document.getElementById("5").value);
+			let box6 = parseInt(document.getElementById("6").value);
+			let box7 = parseInt(document.getElementById("7").value);
+			let box8 = parseInt(document.getElementById("8").value);
+			let box9 = parseInt(document.getElementById("9").value);
+
+			let check1 = document.getElementById("check1");
+			let check2 = document.getElementById("check2");
+			let check3 = document.getElementById("check3");
+			let check4 = document.getElementById("check4");
+			let check5 = document.getElementById("check5");
+			let check6 = document.getElementById("check6");
+			let check7 = document.getElementById("check7");
+			let check8 = document.getElementById("check8");
+
+			let mess = document.getElementById("para");
+
+			/*check1.className="bx bx-check";
+			check1.style.display="initial";
+			console.log(check1);
+			console.log(check1.className);*/
+
+			/*if(box1 == NaN){
+				box1=0;	
+				console.log(box1);			
+			}
+			console.log(box1);*/
+
+			//For Check 1
+			if((box1 + box2 + box3) == 15 && box1!=box2 && box2 != box3 && box3 != box1){
+				check1.className="bx bx-check";
+				check1.style.display="initial";
+				//check1.style.color="#3CCF4E";
+			}
+			else{
+				check1.className="bx bx-x";
+				check1.style.display="initial";
+				//check1.style.color="red";
+			}
+
+			//For Check 2
+			if((box4 + box5 + box6) == 15 && box4!=box5 && box5 != box6 && box6 != box4 && box4!=box1 && box5!=box2 && box6 !=box3){
+				check2.className="bx bx-check";
+				check2.style.display="initial";
+			}
+			else{
+				check2.className="bx bx-x";
+				check2.style.display="initial";
+				//check2.style.color="red";
+			}
+
+			//For Check 3
+			if((box7 + box8 + box9) == 15 && box7!=box8 && box8 != box9 && box9 != box7 && box7!=box4 && box7!=box1 && box8!=box5 && box8 != box2 && box9!=box3 && box9 != box3){
+				check3.className="bx bx-check";
+				check3.style.display="initial";
+			}
+			else{
+				check3.className="bx bx-x";
+				check3.style.display="initial";
+				//check3.style.color="red";
+			}
+			
+			//For Check 4
+			if((box1 + box4 + box7) == 15 && box1!=box4 && box4 != box7 && box7 != box1){
+				check4.className="bx bx-check";
+				check4.style.display="initial";
+			}
+			else{
+				check4.className="bx bx-x";
+				check4.style.display="initial";
+				//check4.style.color="red";
+			}
+
+			//For Check 5
+			if((box2 + box5 + box8) == 15 && box2!=box5 && box5 != box8 && box8 != box2 && box2!=box1 && box5!=box4 && box8!==box7){
+				check5.className="bx bx-check";
+				check5.style.display="initial";
+			}
+			else{
+				check5.className="bx bx-x";
+				check5.style.display="initial";
+				//check5.style.color="red";
+			}
+
+			//For Check 6
+			if((box3 + box6 + box9) == 15 && box3!=box6 && box6 != box9 && box9 != box3 && box3!= box2 && box3 != box1 && box6!=box5 && box6!=box4 && box9!=box8 && box9!=box7){
+				check6.className="bx bx-check";
+				check6.style.display="initial";
+			}
+			else{
+				check6.className="bx bx-x";
+				check6.style.display="initial";
+				//check6.style.color="red";
+			}
+
+			if((box1 + box5 + box9) == 15 && box1!=box5 && box5!=box9 && box9!=box1){
+				check7.className="bx bx-check";
+				check7.style.display="initial";
+			}
+			else{
+				check7.className="bx bx-x";
+				check7.style.display="initial";
+			}
+
+			if((box3 + box5 + box7) == 15 && box3!=box5 && box5!=box7 && box7!=box3){
+				check8.className="bx bx-check";
+				check8.style.display="initial";
+			}
+			else{
+				check8.className="bx bx-x";
+				check8.style.display="initial";
+			}
+
+
+
+			let congmess = document.getElementById("cong");
+			let quinze = document.getElementById('head');
+			let celebrate = document.getElementById('congMes');
+
+			//To Whether you won the game or not
+			if(check1.className == "bx bx-check" &&
+				check2.className == "bx bx-check" &&
+				check3.className == "bx bx-check" &&
+				check4.className == "bx bx-check" &&
+				check5.className == "bx bx-check" &&
+				check6.className == "bx bx-check" &&
+				check7.className == "bx bx-check" &&
+				check8.className == "bx bx-check"
+				){
+				initConfetti();
+				render();
+				congmess.style.display="initial";
+				quinze.style.display = "none";
+				celebrate.innerHTML = `Congrats ${document.cookie} &#129395; !`;
+			}
+			
+			
+
+			
+		}
+
+
+	</script>
+
+
+	<script src="confetti.js"></script>
+
+
+</body>
+</html>
